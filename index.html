@@ -30,10 +30,8 @@
         </div>
         <input class="btn" type="submit" value="Submit" required>
       </form>
-      <ul id="listOfItems"></ul>
-
     </div>
-    <script src="main.js"></script>
+    <ul id='listOfItems' style="text-align: center;" class="items"> </ul>
     <script>
         function saveToLocalStorage(event){
             event.preventDefault();
@@ -52,14 +50,17 @@
             };
 
             localStorage.setItem(myobj.UserName,JSON.stringify(myobj));
-           // showUserOnScreen(obj);
+
+            saveOnScreen(myobj);
         }
-        // function showUserOnScreen(obj){
-        //   const parentElem = document.getElementById('listOfItems');
-        //   const chilElem = document.createElement('li');
-        //   chilElem.textContent = obj.UserName + ' ' + obj.Phone + ' ' + obj.Date ;
-        //   parentElem.appendChild(chilElem); 
-        // }
+
+        function saveOnScreen(myObj){
+          const parentEle = document.getElementById('listOfItems');
+            const childEle = document.createElement('li');
+            childEle.textContent = myObj.UserName + ' - ' + myObj.Phone + ' - ' + myObj.Date;
+            parentEle.appendChild(childEle)
+        }
+       
     </script>
   </body>
 </html>
