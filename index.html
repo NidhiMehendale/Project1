@@ -18,15 +18,15 @@
         <div class="msg"></div>
         <div>
           <label for="name">Name:</label>
-          <input type="text"  name="username" required>
+          <input type="text"  name="username" id="userid" required>
         </div>
         <div>
             <label for="phone">Phone:</label>
-            <input type="text"  name="phone" required>
+            <input type="text"  name="phone" id="phoneid" required>
         </div>
         <div>
             <label for="date">Date:</label>
-            <input type="date"  name="date" required>
+            <input type="date"  name="date" id="dateid" required>
         </div>
         <input class="btn" type="submit" value="Submit" required>
       </form>
@@ -55,7 +55,7 @@
         }
 
         function saveUserOnScreen(myObj){
-          const parentEle = document.getElementById('listOfItems');
+            const parentEle = document.getElementById('listOfItems');
             const childEle = document.createElement('li');
             childEle.textContent = myObj.UserName + ' - ' + myObj.Phone + ' - ' + myObj.Date;
 
@@ -66,14 +66,22 @@
               localStorage.removeItem(myObj.UserName);
               parentEle.removeChild(childEle);
             }
+
+            const EditButton = document.createElement('input');
+            EditButton.type = "button";
+            EditButton.value = "Edit";
+            EditButton.onclick = () => {
+              localStorage.removeItem(myObj.UserName);
+              parentEle.removeChild(childEle);
+              document.getElementById("userid").value = myObj.UserName;
+              document.getElementById("phoneid").value = myObj.Phone;
+              document.getElementById("dateid").value = myObj.Date; 
+            }
+
             childEle.appendChild(deleteButton);
+            childEle.appendChild(EditButton);
             parentEle.appendChild(childEle);
-
-
-        }
-
-       
-        
+          }     
     </script>
   </body>
 </html>
