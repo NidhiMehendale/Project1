@@ -30,6 +30,7 @@
         </div>
         <input class="btn" type="submit" value="Submit" required>
       </form>
+      <ul id="listOfItems"></ul>
 
     </div>
     <script src="main.js"></script>
@@ -44,23 +45,21 @@
             // localStorage.setItem('phone',phone);
             // localStorage.setItem('date',date);
             
-            let myobj = {
+            const myobj = {
               UserName :  name,
               Phone : phone,
               Date :  date 
             };
-            let userDetails = localStorage.getItem("UserDetails");
-            let userArray = [];
 
-            if (userDetails !== null) {
-              userArray = JSON.parse(userDetails);
-            }
-            userArray.push(myobj);
-
-            let userArray_serialize = JSON.stringify(userArray);
-            localStorage.setItem("UserDetails",userArray_serialize);
-
+            localStorage.setItem(myobj.UserName,JSON.stringify(myobj));
+           // showUserOnScreen(obj);
         }
+        // function showUserOnScreen(obj){
+        //   const parentElem = document.getElementById('listOfItems');
+        //   const chilElem = document.createElement('li');
+        //   chilElem.textContent = obj.UserName + ' ' + obj.Phone + ' ' + obj.Date ;
+        //   parentElem.appendChild(chilElem); 
+        // }
     </script>
   </body>
 </html>
