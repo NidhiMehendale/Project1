@@ -31,7 +31,7 @@
         <input class="btn" type="submit" value="Submit" required>
       </form>
     </div>
-    <ul id='listOfItems' style="text-align: center;" class="items"> </ul>
+    <ul id='listOfItems' style="text-align: center;" class="items"></ul>
     <script>
         function saveToLocalStorage(event){
             event.preventDefault();
@@ -51,16 +51,29 @@
 
             localStorage.setItem(myobj.UserName,JSON.stringify(myobj));
 
-            saveOnScreen(myobj);
+            saveUserOnScreen(myobj);
         }
 
-        function saveOnScreen(myObj){
+        function saveUserOnScreen(myObj){
           const parentEle = document.getElementById('listOfItems');
             const childEle = document.createElement('li');
             childEle.textContent = myObj.UserName + ' - ' + myObj.Phone + ' - ' + myObj.Date;
-            parentEle.appendChild(childEle)
+
+            const deleteButton = document.createElement('input');
+            deleteButton.type = "button";
+            deleteButton.value = "Delete";
+            deleteButton.onclick = () => {
+              localStorage.removeItem(myObj.UserName);
+              parentEle.removeChild(childEle);
+            }
+            childEle.appendChild(deleteButton);
+            parentEle.appendChild(childEle);
+
+
         }
+
        
+        
     </script>
   </body>
 </html>
