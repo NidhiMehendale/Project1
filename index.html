@@ -18,17 +18,17 @@
         <div class="msg"></div>
         <div>
           <label for="name">Name:</label>
-          <input type="text"  name="username">
+          <input type="text"  name="username" required>
         </div>
         <div>
             <label for="phone">Phone:</label>
-            <input type="text"  name="phone">
+            <input type="text"  name="phone" required>
         </div>
         <div>
             <label for="date">Date:</label>
-            <input type="date"  name="date">
+            <input type="date"  name="date" required>
         </div>
-        <input class="btn" type="submit" value="Submit">
+        <input class="btn" type="submit" value="Submit" required>
       </form>
 
     </div>
@@ -40,9 +40,26 @@
             const phone = event.target.phone.value;
             const date = event.target.date.value;
             
-            localStorage.setItem('name',name);
-            localStorage.setItem('phone',phone);
-            localStorage.setItem('date',date);
+            // localStorage.setItem('name',name);
+            // localStorage.setItem('phone',phone);
+            // localStorage.setItem('date',date);
+            
+            let myobj = {
+              UserName :  name,
+              Phone : phone,
+              Date :  date 
+            };
+            let userDetails = localStorage.getItem("UserDetails");
+            let userArray = [];
+
+            if (userDetails !== null) {
+              userArray = JSON.parse(userDetails);
+            }
+            userArray.push(myobj);
+
+            let userArray_serialize = JSON.stringify(userArray);
+            localStorage.setItem("UserDetails",userArray_serialize);
+
         }
     </script>
   </body>
