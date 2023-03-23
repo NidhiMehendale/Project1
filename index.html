@@ -77,7 +77,11 @@
         
           axios.get("https://crudcrud.com/api/45ed28fcca7948bb920bc42a28a23938/appointmentData")
            .then( (response) => {
-             saveUserOnScreen(response.data);
+
+            for(var i=0;i<response.data.length ;i++){
+              saveUserOnScreen(response.data[i]);
+            }
+           
            })
            .catch( (err) => {
             document.body.innerHTML = document.body.innerHTML + "<h4> Something went wrong<h4>";
