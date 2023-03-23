@@ -50,7 +50,7 @@
               Date :  date 
             };
             
-            axios.post("https://crudcrud.com/api/45ed28fcca7948bb920bc42a28a23938/appointmentData",myobj)
+            axios.post("https://crudcrud.com/api/45ed28fcca7948bb920bc42a28a23938/appointmentData" , myobj)
              .then( (response) => {
               saveUserOnScreen(response.data);
               //console.log(response);
@@ -97,8 +97,16 @@
             deleteButton.type = "button";
             deleteButton.value = "Delete";
             deleteButton.onclick = () => {
-              localStorage.removeItem(myObj.UserName);
-              parentEle.removeChild(childEle);
+             axios.delete("https://crudcrud.com/api/45ed28fcca7948bb920bc42a28a23938/appointmentData/" + myObj._id)
+            .then((response) => {
+              console.log("delete");
+                parentEle.removeChild(childEle);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+              // localStorage.removeItem(myObj.UserName);
+              // parentEle.removeChild(childEle);
             }
 
             const EditButton = document.createElement('input');
