@@ -32,6 +32,7 @@
       </form>
     </div>
     <ul id='listOfItems' style="text-align: center;" class="items"></ul>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.3.4/axios.min.js"></script>
     <script>
         function saveToLocalStorage(event){
             event.preventDefault();
@@ -48,11 +49,40 @@
               Phone : phone,
               Date :  date 
             };
+            
+            axios.post("https://crudcrud.com/api/45ed28fcca7948bb920bc42a28a23938/appointmentData",myobj)
+             .then( (response) => {
+              saveUserOnScreen(response.data);
+              //console.log(response);
+             })
+             .catch((err) => {
+                document.body.innerHTML = document.body.innerHTML + "<h4> Something went wrong<h4>";
+                //console.log(obj);
+             })
 
-            localStorage.setItem(myobj.UserName,JSON.stringify(myobj));
-
-            saveUserOnScreen(myobj);
+           // localStorage.setItem(myobj.UserName,JSON.stringify(myobj));
+           // saveUserOnScreen(myobj);
         }
+
+        window.addEventListener("DOMContentLoaded", () => {
+          //  const localStorageObj = localStorage;
+          //  const localStoragekeys = Object.keys(localStorageObj);
+
+          //  for(var i=0;i<localStoragekeys.length;i++){
+          //   const key = localStoragekeys[i];
+          //   const userDetailsString = localStorageObj[key];
+          //   const userDetailObj = JSON.parse(userDetailsString);
+          //    saveUserOnScreen(userDetailObj);
+          //  }
+        
+          axios.get("https://crudcrud.com/api/45ed28fcca7948bb920bc42a28a23938/appointmentData")
+           .then( (response) => {
+             saveUserOnScreen(response.data);
+           })
+           .catch( (err) => {
+            document.body.innerHTML = document.body.innerHTML + "<h4> Something went wrong<h4>";
+           })
+        })
 
         function saveUserOnScreen(myObj){
             const parentEle = document.getElementById('listOfItems');
