@@ -50,7 +50,7 @@
               Date :  date 
             };
             
-            axios.post("https://crudcrud.com/api/45ed28fcca7948bb920bc42a28a23938/appointmentData" , myobj)
+            axios.post("https://crudcrud.com/api/7fff0b4cc784475983c0017a01e7fea3/appointmentData" , myobj)
              .then( (response) => {
               saveUserOnScreen(response.data);
               //console.log(response);
@@ -75,7 +75,7 @@
           //    saveUserOnScreen(userDetailObj);
           //  }
         
-          axios.get("https://crudcrud.com/api/45ed28fcca7948bb920bc42a28a23938/appointmentData")
+          axios.get("https://crudcrud.com/api/7fff0b4cc784475983c0017a01e7fea3/appointmentData")
            .then( (response) => {
 
             for(var i=0;i<response.data.length ;i++){
@@ -97,9 +97,8 @@
             deleteButton.type = "button";
             deleteButton.value = "Delete";
             deleteButton.onclick = () => {
-             axios.delete("https://crudcrud.com/api/45ed28fcca7948bb920bc42a28a23938/appointmentData/" + myObj._id)
+             axios.delete("https://crudcrud.com/api/7fff0b4cc784475983c0017a01e7fea3/appointmentData/" + myObj._id)
             .then((response) => {
-              console.log("delete");
                 parentEle.removeChild(childEle);
             })
             .catch((err) => {
@@ -113,17 +112,25 @@
             EditButton.type = "button";
             EditButton.value = "Edit";
             EditButton.onclick = () => {
-              localStorage.removeItem(myObj.UserName);
-              parentEle.removeChild(childEle);
+             // localStorage.removeItem(myObj.UserName);
+               
               document.getElementById("userid").value = myObj.UserName;
               document.getElementById("phoneid").value = myObj.Phone;
               document.getElementById("dateid").value = myObj.Date; 
+             
+              axios.delete("https://crudcrud.com/api/7fff0b4cc784475983c0017a01e7fea3/appointmentData/" + myObj._id)
+                  .then((response) => {
+                      parentEle.removeChild(childEle);
+                  })
+                  .catch((err) => {
+                      console.log(err);
+              }); 
             }
 
             childEle.appendChild(deleteButton);
             childEle.appendChild(EditButton);
             parentEle.appendChild(childEle);
-          }     
+    }     
     </script>
   </body>
 </html>
